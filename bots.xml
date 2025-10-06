@@ -11,40 +11,34 @@
 <cfg>d2jbott.cfg</cfg>
 <log>d2jbot.log</log>
 </bot>
-
 <bot>
 <nombre>DBZ Lunatik</nombre>
 <proceso>d2nbot.exe</proceso>
 <cfg>d2nbott.cfg</cfg>
 <log>d2nbot.log</log>
 </bot>
-
 <bot>
 <nombre>Canned Bread</nombre>
 <proceso>d2sbot.exe</proceso>
 <cfg>d2sbott.cfg</cfg>
 <log>d2sbot.log</log>
 </bot>
-
 <bot>
 <nombre>hvsa X3 v4.42-Hotfix</nombre>
 <proceso>d2tbot.exe</proceso>
 <cfg>d2tbott.cfg</cfg>
 <log>d2tbot.log</log>
 </bot>
-
 <bot>
 <nombre>Pudge Wars</nombre>
 <proceso>d2xbot.exe</proceso>
 <cfg>d2xbott.cfg</cfg>
 <log>d2xbot.log</log>
 </bot>
-
 <bot>
 <nombre>Fight of Characters</nombre>
 <proceso>d2zbot.exe</proceso>
 <cfg>d2zbott.cfg</cfg>
 <log>d2zbot.log</log>
 </bot>
-
 </bots>
