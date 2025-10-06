@@ -50,7 +50,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 		
 		<a href="#" class="nav-link" data-section="pages/language_viewer">🌐 Archivo de Lenguaje</a>
 
-
+		<a href="#" class="nav-link" data-section="pages/soporte">📎 Soporte</a>
         <a href="logout.php" class="nav-link text-danger">🚪 Cerrar Sesión</a>
       </div>
     </nav>
