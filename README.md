@@ -7,6 +7,18 @@
 
 ---
 
+![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/1.png)
+![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/2.png)
+![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/3.png)
+![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/4.png)
+![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/5.png)
+![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/6.png)
+![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/7.png)
+![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/8.png)
+![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/9.png)
+![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/10.png)
+
+
 ## 🧩 Descripción del Proyecto
 
 Este panel fue diseñado para gestionar servidores de **Warcraft III** con el sistema **GHost++**, permitiendo una administración avanzada desde una interfaz web moderna.  
