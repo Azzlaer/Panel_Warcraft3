@@ -7,6 +7,9 @@
 
 ---
 
+
+## 🧩 IMAGENES DEL PROYECTO
+
 ![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/1.png)
 ![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/2.png)
 ![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/3.png)
@@ -17,7 +20,19 @@
 ![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/8.png)
 ![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/9.png)
 ![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/10.png)
+![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/11.png)
+![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/12.png)
+![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/13.png)
+![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/14.png)
+![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/15.png)
+![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/16.png)
+![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/17.png)
+![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/18.png)
+![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/19.png)
+![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/20.png)
 
+## 🧩 NUEVA FUNCION AÑADIDA
+![Preview](https://github.com/Azzlaer/Panel_Warcraft3/blob/main/screen/21.png)
 
 ## 🧩 Descripción del Proyecto
 
