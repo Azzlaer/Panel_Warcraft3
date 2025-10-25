@@ -11,23 +11,30 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-
+// === ADMINISTRADOR
 define('ADMIN_USER', getenv('ADMIN_USER') ?: 'Azzlaer');
 define('ADMIN_PASS', getenv('ADMIN_PASS') ?: '35027595');
 define('FOOTER_TEXT', 'Panel Warcraft 3 Bots © ' . date('Y'));
 
+
+// === ARCHIVOS TXT DEL BOT
 define('MOTD_FILE',        'C:\\Servidores\\wc3bots\\motd.txt');
 define('GAMEOVER_FILE',    'C:\\Servidores\\wc3bots\\gameover.txt');
 define('GAMELOADED_FILE',  'C:\\Servidores\\wc3bots\\gameloaded.txt');
 define('BOTS_XML_PATH', 'C:\\xampp\\htdocs\panel\bots.xml');
 
-
+// === BOT DISCORD CONFIG ===
+define('DISCORD_MULTIBOT', 1);
+define('DISCORD_DEFAULT_MESSAGES', 'C:/MyProjects/Multi_Bot/config/default_messages.ini');
+define('DISCORD_SETTINGS_JSON', 'C:/MyProjects/Multi_Bot/data/settings.json');
+define('DISCORD_LOG_FILE', 'C:/MyProjects/Multi_Bot/app.log');
+define('DISCORD_EXECUTABLE', 'C:/MyProjects/Multi_Bot/A_MultiBot.exe');
 
 // === Archivos de idioma ===
 define('LANG_FOLDER', 'C:\\Servidores\\wc3bots\\');  // Carpeta donde están los .cfg
 define('LANG_DEFAULT', 'spanish'); // Idioma por defecto (spanish, german, russian, turkish)
 
-
+// === CARPETA WARCRAFT 3
 define('WC3_MAPS_PATH', 'C:\\Games\\Warcraft III\\Maps\\Download\\');
 define('WC3_MAPCFG_PATH', 'C:\\Servidores\\wc3bots\\mapcfgs\\');
 

@@ -29,6 +29,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
       <div class="nav flex-column nav-pills">
         <a href="#" class="nav-link" data-section="pages/bot_manager">🤖 Bot Manager</a>
 		<a href="#" class="nav-link" data-section="pages/listar_procesos">🤖 Bot Process</a>
+		<a href="#" class="nav-link" data-section="pages/bot_discord">🤖 Bot Discord</a>
         <a href="#" class="nav-link" data-section="pages/add_bot">➕ Agregar Bot</a>
         <a href="#" class="nav-link" data-section="pages/add_log">➕ Agregar Log</a>
 		<a href="#" class="nav-link" data-section="pages/motd_manager">📜 MOTD Manager</a>
