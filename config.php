@@ -16,12 +16,12 @@ define('ADMIN_USER', getenv('ADMIN_USER') ?: 'Azzlaer');
 define('ADMIN_PASS', getenv('ADMIN_PASS') ?: '35027595');
 define('FOOTER_TEXT', 'Panel Warcraft 3 Bots © ' . date('Y'));
 
-
 // === ARCHIVOS TXT DEL BOT
 define('MOTD_FILE',        'C:\\Servidores\\wc3bots\\motd.txt');
 define('GAMEOVER_FILE',    'C:\\Servidores\\wc3bots\\gameover.txt');
 define('GAMELOADED_FILE',  'C:\\Servidores\\wc3bots\\gameloaded.txt');
 define('BOTS_XML_PATH', 'C:\\xampp\\htdocs\panel\bots.xml');
+define('DISCORD_CONFIG_INI', 'C:\\MyProjects\\Multi_Bot\\config.ini');
 
 // === BOT DISCORD CONFIG ===
 define('DISCORD_MULTIBOT', 1);
@@ -38,7 +38,6 @@ define('LANG_DEFAULT', 'spanish'); // Idioma por defecto (spanish, german, russi
 define('WC3_MAPS_PATH', 'C:\\Games\\Warcraft III\\Maps\\Download\\');
 define('WC3_MAPCFG_PATH', 'C:\\Servidores\\wc3bots\\mapcfgs\\');
 
-
 //define('PYTHON_BIN', 'C:\\Users\\Guardia\\AppData\\Local\\python-3.11.0-embed-amd64\\python.exe');
 //define('PYTHON_BIN', 'C:\\Users\\Guardia\\AppData\\AppData\\Local\\Programs\\Python\\Python312\\python.exe');
 
@@ -48,8 +47,6 @@ define('PY_SCRIPT',  __DIR__ . '/python/ghost_monitor.py');
 
 // Número máximo de líneas de log a mostrar
 define('PY_LOG_LINES', 200);
-
-
 
 if (!defined('WC3_BOTS_PATH')) define('WC3_BOTS_PATH', 'C:\\Servidores\\wc3bots');
 if (!defined('WC3_LOGS_PATH')) define('WC3_LOGS_PATH', 'C:\\Servidores\\logs');

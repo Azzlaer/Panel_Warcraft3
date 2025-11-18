@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../config.php';
 
 $xmlFile  = __DIR__ . '/../bots.xml';
-$logsDir  = 'C:\\Servidores\\logs';
+$logsDir  = 'D:\\Servidores\\acc.d2fbot\\logs';
 
 /* -------- Funciones -------- */
 function wc3_listar_bots_xml_con_logs($xmlPath, $logsDir) {

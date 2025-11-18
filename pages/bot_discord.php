@@ -27,57 +27,99 @@ function procesoActivo($nombre) {
     return !empty($out);
 }
 
+
 // === PETICIONES AJAX ===
 if (isset($_GET['action'])) {
     header('Content-Type: application/json');
     $resp = ['success' => false, 'message' => 'Acción desconocida'];
 
     switch ($_GET['action']) {
-        case 'status':
-            $resp = ['activo' => procesoActivo("A_MultiBot.exe")];
+        case 'save_config':
+            $ok = guardarArchivo(DISCORD_CONFIG_INI, $_POST['contenido_config'] ?? '');
+            $resp = [
+                'success' => $ok,
+                'message' => $ok
+                    ? '💾 Archivo config.ini guardado correctamente.'
+                    : '❌ No se pudo guardar el archivo.'
+            ];
             break;
+
+        case 'status':
+            // ✅ Moderno: usa PowerShell Get-Process para detectar si está corriendo
+            $cmd = 'powershell -NoProfile -Command "Get-Process -Name A_MultiBot -ErrorAction SilentlyContinue | Select-Object -First 1 | ConvertTo-Json"';
+            exec($cmd, $out);
+            $json = trim(implode("", $out));
+            $data = json_decode($json, true);
+            $resp = ['activo' => !empty($data) && isset($data['Id'])];
+            break;
+
         case 'clear_log':
             $ok = limpiarArchivo(DISCORD_LOG_FILE);
-            $resp = ['success' => $ok, 'message' => $ok ? '🧹 Log limpiado correctamente.' : '❌ No se pudo limpiar el log.'];
+            $resp = [
+                'success' => $ok,
+                'message' => $ok
+                    ? '🧹 Log limpiado correctamente.'
+                    : '❌ No se pudo limpiar el log.'
+            ];
             break;
+
         case 'start_bot':
             $ok = ejecutarArchivo(DISCORD_EXECUTABLE);
-            $resp = ['success' => $ok, 'message' => $ok ? '🚀 Bot iniciado correctamente.' : '❌ No se pudo iniciar el bot.'];
+            $resp = [
+                'success' => $ok,
+                'message' => $ok
+                    ? '🚀 Bot iniciado correctamente.'
+                    : '❌ No se pudo iniciar el bot.'
+            ];
             break;
+
         case 'stop_bot':
             $ok = detenerProceso("A_MultiBot.exe");
-            $resp = ['success' => $ok, 'message' => $ok ? '🛑 Bot detenido correctamente.' : '❌ No se encontró el proceso.'];
+            $resp = [
+                'success' => $ok,
+                'message' => $ok
+                    ? '🛑 Bot detenido correctamente.'
+                    : '❌ No se encontró el proceso.'
+            ];
             break;
+
         case 'list_process':
-            exec('wmic process where "name=\'A_MultiBot.exe\'" get Name,ProcessId,SessionName,SessionNumber,WorkingSetSize,ExecutablePath /format:list', $out);
-            $procs = [];
-            $current = [];
-            foreach ($out as $line) {
-                $line = trim($line);
-                if ($line === '') {
-                    if ($current) {
-                        $current['mem'] = isset($current['WorkingSetSize']) ? round($current['WorkingSetSize']/1024/1024, 1) . ' MB' : 'N/A';
-                        $procs[] = [
-                            'name' => $current['Name'] ?? 'N/A',
-                            'pid' => $current['ProcessId'] ?? 'N/A',
-                            'session' => $current['SessionName'] ?? 'N/A',
-                            'session_num' => $current['SessionNumber'] ?? 'N/A',
-                            'mem' => $current['mem'],
-                            'path' => $current['ExecutablePath'] ?? 'N/A'
-                        ];
-                        $current = [];
-                    }
-                    continue;
-                }
-                [$k, $v] = explode('=', $line, 2) + ['', ''];
-                $current[$k] = $v;
+            // ✅ Reemplazo moderno de WMIC → PowerShell Get-CimInstance
+            $cmd = 'powershell -NoProfile -Command "Get-CimInstance Win32_Process -Filter \'Name = \"A_MultiBot.exe\"\' | Select-Object Name,ProcessId,SessionId,WorkingSetSize,ExecutablePath | ConvertTo-Json"';
+            exec($cmd, $out);
+
+            $json = trim(implode("", $out));
+            $procs = json_decode($json, true);
+
+            // Si devuelve un solo proceso, lo envolvemos en array
+            if (isset($procs['ProcessId'])) {
+                $procs = [$procs];
             }
-            echo json_encode($procs);
+
+            $result = [];
+            if (!empty($procs) && is_array($procs)) {
+                foreach ($procs as $p) {
+                    $result[] = [
+                        'name' => $p['Name'] ?? 'N/A',
+                        'pid' => $p['ProcessId'] ?? 'N/A',
+                        'session' => 'N/A',
+                        'session_num' => $p['SessionId'] ?? 'N/A',
+                        'mem' => isset($p['WorkingSetSize'])
+                            ? round($p['WorkingSetSize'] / 1024 / 1024, 1) . ' MB'
+                            : 'N/A',
+                        'path' => $p['ExecutablePath'] ?? 'N/A'
+                    ];
+                }
+            }
+
+            echo json_encode($result);
             exit;
     }
+
     echo json_encode($resp);
     exit;
 }
+
 
 // === ACCIONES MANUALES (Guardar archivos) ===
 $mensaje = "";
@@ -93,6 +135,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ? "<div class='alert alert-success'>✅ Archivo settings.json guardado correctamente.</div>"
             : "<div class='alert alert-danger'>❌ No se pudo guardar el archivo.</div>";
     }
+
+	if (isset($_POST['guardar_config'])) {
+    $mensaje = guardarArchivo(DISCORD_CONFIG_INI, $_POST['contenido_config'])
+        ? "<div class='alert alert-success'>✅ Archivo config.ini guardado correctamente.</div>"
+        : "<div class='alert alert-danger'>❌ No se pudo guardar el archivo config.ini.</div>";
+}
+
 }
 
 // === CHEQUEOS ===
@@ -102,9 +151,14 @@ $existe_log  = file_exists(DISCORD_LOG_FILE);
 $existe_exe  = file_exists(DISCORD_EXECUTABLE);
 $activo      = procesoActivo("A_MultiBot.exe");
 
+
 $ini_content  = $existe_ini ? leerArchivo(DISCORD_DEFAULT_MESSAGES) : "";
 $json_content = $existe_json ? leerArchivo(DISCORD_SETTINGS_JSON) : "";
 $log_content  = $existe_log ? leerArchivo(DISCORD_LOG_FILE) : "";
+$existe_config = file_exists(DISCORD_CONFIG_INI);
+$config_content = $existe_config ? leerArchivo(DISCORD_CONFIG_INI) : "";
+
+
 ?>
 
 <div class="container py-4 text-light">
@@ -156,6 +210,13 @@ $log_content  = $existe_log ? leerArchivo(DISCORD_LOG_FILE) : "";
               <button id="btnClearLog" class="btn btn-danger btn-sm" <?= !$existe_log ? 'disabled' : '' ?>>🧹 Vaciar</button>
             </td>
           </tr>
+		  <tr>
+		<td>config.ini</td>
+		<td><?= DISCORD_CONFIG_INI ?></td>
+		<td>
+		<button class="btn btn-primary btn-sm" onclick="mostrarEditor('config')" <?= !$existe_config ? 'disabled' : '' ?>>✏️ Editar</button>
+		</td>
+		</tr>
           <tr>
             <td>A_MultiBot.exe</td>
             <td><?= DISCORD_EXECUTABLE ?></td>
@@ -230,12 +291,42 @@ $log_content  = $existe_log ? leerArchivo(DISCORD_LOG_FILE) : "";
   </div>
 </div>
 
+<!-- EDITOR CONFIG.INI -->
+<div id="editor_config" class="card bg-dark mb-4" style="display:none;">
+  <div class="card-body">
+    <h5 class="card-title text-info">📝 Editar Archivo: config.ini</h5>
+    <form id="formConfigIni">
+      <textarea id="config-content" name="contenido_config" class="form-control bg-dark text-light" rows="15"><?= $config_content ?></textarea>
+      <button type="submit" class="btn btn-success mt-3">💾 Guardar Cambios</button>
+      <button type="button" class="btn btn-secondary mt-3" onclick="cerrarEditor('config')">❌ Cerrar</button>
+    </form>
+  </div>
+</div>
+
+
+
 <!-- TOAST CONTAINER -->
 <div class="position-fixed bottom-0 end-0 p-3" style="z-index:9999;">
   <div id="toastContainer"></div>
 </div>
 
 <script>
+
+// --- Guardar config.ini por AJAX ---
+document.getElementById('formConfigIni')?.addEventListener('submit', function(e){
+  e.preventDefault();
+  const contenido = document.getElementById('config-content').value;
+  fetch('pages/bot_discord.php?action=save_config', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: 'contenido_config=' + encodeURIComponent(contenido)
+  })
+  .then(r => r.json())
+  .then(data => showToast(data.message, data.success))
+  .catch(() => showToast('❌ Error al guardar config.ini', false));
+});
+
+
 // --- UI helpers ---
 function mostrarEditor(tipo){ document.getElementById('editor_'+tipo).style.display='block'; }
 function cerrarEditor(tipo){ document.getElementById('editor_'+tipo).style.display='none'; }

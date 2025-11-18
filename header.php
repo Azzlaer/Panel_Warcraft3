@@ -27,11 +27,11 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     <nav class="col-md-3 col-lg-2 d-md-block sidebar p-3">
       <h3 class="text-light mb-4">⚔️ Warcraft 3</h3>
       <div class="nav flex-column nav-pills">
+        <a href="#" class="nav-link" data-section="pages/add_bot">➕ Agregar Bot</a>
+        <a href="#" class="nav-link" data-section="pages/add_log">➕ Agregar Log</a>	  
         <a href="#" class="nav-link" data-section="pages/bot_manager">🤖 Bot Manager</a>
 		<a href="#" class="nav-link" data-section="pages/listar_procesos">🤖 Bot Process</a>
 		<a href="#" class="nav-link" data-section="pages/bot_discord">🤖 Bot Discord</a>
-        <a href="#" class="nav-link" data-section="pages/add_bot">➕ Agregar Bot</a>
-        <a href="#" class="nav-link" data-section="pages/add_log">➕ Agregar Log</a>
 		<a href="#" class="nav-link" data-section="pages/motd_manager">📜 MOTD Manager</a>
 		<a href="#" class="nav-link" data-section="pages/ip_blacklist">❌ IP Bans</a>
 		<a href="#" class="nav-link" data-section="pages/ver_bans">🚫 Ver Bans</a>

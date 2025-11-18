@@ -32,7 +32,7 @@
 <proceso>d2tbot.exe</proceso>
 <cfg>d2tbott.cfg</cfg>
 
-</bot>
+<log>d2tbot.log</log></bot>
 
 <bot>
 <nombre>Pudge Wars</nombre>
